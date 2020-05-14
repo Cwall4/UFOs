@@ -30,18 +30,20 @@ var filters = {};
 function updateFilters() {
 
   // Save the element, value, and id of the filter that was changed
-  filters[date] = d3.select("#datetime").property("value");
+  filters["datetime"] = d3.select("#datetime").property("value");
 
-  filters[city] = d3.select("#city").property("value");
+  filters["city"] = d3.select("#city").property("value");
 
-  filters[state] = d3.select("#state").property("value");
+  filters["state"] = d3.select("#state").property("value");
 
-  filters[country] = d3.select("#country").property("value");
+  filters["country"] = d3.select("#country").property("value");
 
-  filters[shape] = d3.select("#shape").property("value");
+  filters["shape"] = d3.select("#shape").property("value");
 
   // If a filter value was entered then add that filterId and value
   // to the filters list. Otherwise, clear that filter from the filters object
+
+  // console.log(filters["datetime"]);
 
   // Call function to apply all filters and rebuild the table
   filterTable();
@@ -54,9 +56,11 @@ function filterTable() {
 
   // Loop through all of the filters and keep any data that
   // matches the filter values
-  filters.forEach(function(entry) {
-    if (entry[key]) {
-        filteredData = filteredData.filter(row => row[key] === entry[key]);
+  Object.keys(filters).forEach(function(key) {
+    if (filters[key]) {
+        filteredData = filteredData.filter(row => row[key] === filters[key]);
+
+        console.log(filters[key]);
     };
   });
 
